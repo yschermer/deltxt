@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    li {
+      font-size: 1rem;
+    }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    #notepad {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+
+      /* Fixes Scrollbar Issue */
+      box-sizing: border-box;
+      border: none;
+      /* Remove the default border */
+      outline: none;
+      /* Remove focus outline */
+      font-family: inherit;
+      font-size: 3rem;
+      cursor:text;
+      overflow: hidden;
+      /* Hide the initial scrollbar */
+      resize: none;
+      /* Disable manual resizing */
+      /* Add padding for a nicer look */
+    }
+
+    .screen-margin {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+
+    #menu {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    #sign-out-button {
+      margin-left: auto;
+      /* Push sign-out button to the right */
+    }
+
+    #files-list li {
+      font-size: 3rem;
+      margin-bottom: 8px;
+      /* Adjust as desired */
+    }
+
+    #files-list li.selected {
+      font-weight: bold;
+      /* Adjust as desired */
+    }
+
+    #files-area {
+      display: none;
+    }
+
+    #status-message {
+      font-size: 2rem;
+      color: gray;
+    }
+
+    .menu-button {
+      font-size: 3rem;
+    }
+
+    @media (min-width: 1024px){
+      h1 {
+        font-size: 2rem;
+      }
+
+      #status-message {
+        font-size: 0.75rem;
+      }
+
+      #notepad {
+        font-size: 1rem;
+      }
+
+      #files-list li {
+        font-size: 1rem;
+      }
+
+      .screen-margin {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      .menu-button {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <title>DelTxt.com</title>
+</head>
+
+<body style="font-size: 1rem;">
+  <div class="screen-margin">
+    <h1>DelTxt - Simple & Free Notepad</h1>
+  </div>
+  <div id="auth-section" class="screen-margin" style="display: none;">
+    <ul style="margin-bottom: 2rem;">
+      <li>
+        private and free cloud storage.
+      </li>
+      <li>
+        no user tracking, ads, or cookies.
+      </li>
+      <li>
+        data is never shared or sold.
+      </li>
+      <li>
+        old notes are deleted (7 days since last edit).
+      </li>
+      <li>
+        simple interface like Notepad/TextEdit.
+      </li>
+      <li>
+        complete source code: <a href="https://github.com/yschermer/deltxt">https://github.com/yschermer/deltxt</a>
+      </li>
+    </ul>
+    <p style="margin-bottom: 2rem;">
+      <span style="font-weight: bold;">Why are old notes deleted?</span>
+      <br/>
+      <span> When was the last time you opened your old notes? For most of them, the answer is likely never.<br/>So, declutter your mind and save a tiny bit of the planet by having it automatically deleted.</span> 
+    </p>
+    <p>
+      <span style="font-weight: bold;">Get started</span>
+      <br/>
+      <span>An account is needed to store your notes privately.</span>
+    </p>
+    <button id="sign-in-button" class="menu-button">Sign in with Google</button>
+  </div>
+  <div id="app" style="display: none;" class="screen-margin">
+    <div id="menu">
+      <button id="new-file-button" class="menu-button" style="margin-right: 8px;">New File</button>
+      <button id="files-button" class="menu-button">Files</button>
+      <button id="sign-out-button" class="menu-button">Sign Out</button>
+    </div>
+    <div id="files-area">
+      <ul id="files-list"></ul>
+    </div>
+
+    <hr />
+
+    <div id="status-message">Last auto-save:</div>
+    <br/>
+    <textarea id="notepad" placeholder="Start typing here..."></textarea>
+  </div>
+
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
